@@ -1,0 +1,40 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\model\ExerciseFinish;
+use Illuminate\Http\Request;
+
+class ExerciseFinishController extends Controller
+{
+    public function show(Request $request, $id)
+    {
+        $finish = ExerciseFinish::join('student', 'student.idStudent', '=', 'exercise_finish.idStudent')
+            ->join('exercise', 'exercise.idExercise', '=', 'exercise_finish.idExercise')
+            ->find($id);
+        return view("exercise.mark", [
+            'finish' => $finish,
+        ]);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $mark = $request->get("mark");
+        $note = $request->get("note");
+
+        $finish = ExerciseFinish::find($id);
+        $finish->mark = $mark;
+        $finish->note = $note;
+        $finish->save();
+        return response()->json(['data' => $finish], 200);
+    }
+
+    public function edit(Request $request, $id)
+    {
+        $finish = ExerciseFinish::join('exercise', 'exercise.idExercise', '=', 'exercise_finish.idExercise')
+            ->join('student', 'student.idStudent', '=', 'exercise_finish.idStudent')
+            ->find($id);
+        return response()->json(['data' => $finish], 200);
+        // return $finish;
+    }
+}

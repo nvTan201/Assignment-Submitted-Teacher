@@ -9,6 +9,7 @@
     <title>Material Dashboard Pro by Creative Tim</title>
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- Bootstrap core CSS     -->
     <link href="{{ asset('assets') }}/css/bootstrap.min.css" rel="stylesheet" />
     <!--  Material Dashboard CSS    -->
@@ -17,17 +18,20 @@
     <link href="{{ asset('assets') }}/css/demo.css" rel="stylesheet" />
     <!--     Fonts and icons     -->
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons" />
+    <link rel="stylesheet" type="text/css" 
+        href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <script type="text/javascript" src="{{ asset('ckeditor') }}/ckeditor/ckeditor.js"></script>
+    <script type="text/javascript" src="{{ asset('ckeditor') }}/ckfinder/ckfinder.js"></script>
+
+     <link href="https://unpkg.com/filepond@^4/dist/filepond.css" rel="stylesheet" />
+
 </head>
 
 <body>
     <div class="wrapper">
-                <!--
-        Tip 1: You can change the color of active element of the sidebar using: data-active-color="purple | blue | green | orange | red | rose"
-        Tip 2: you can also add an image using data-image tag
-        Tip 3: you can change the color of the sidebar with data-background-color="white | black"
-    -->
+
         {{-- sidebar --}}
         @include('layout.sidebar')
 
@@ -36,14 +40,20 @@
             @include('layout.navbar')
 
             {{-- content --}}
+            <div class="content">
             @yield('content')
-
+            </div>
+            
             {{-- footer --}}
             @include('layout.footer')
 
         </div>
     </div>
 </body>
+
+<script src="https://unpkg.com/filepond@^4/dist/filepond.js"></script>
+
+<script src = "https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.29.2/sweetalert2.all.js"> </script>
 <!--   Core JS Files   -->
 <script src="{{ asset('assets') }}/js/jquery-3.2.1.min.js" type="text/javascript"></script>
 <script src="{{ asset('assets') }}/js/bootstrap.min.js" type="text/javascript"></script>
@@ -87,6 +97,14 @@
 <script src="{{ asset('assets') }}/js/material-dashboard.js?v=1.2.1"></script>
 <!-- Material Dashboard DEMO methods, don't include it in your project! -->
 <script src="{{ asset('assets') }}/js/demo.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        md.initSliders()
+        demo.initFormExtendedDatetimepickers();
+    });
+</script>
+
 <script type="text/javascript">
     $(document).ready(function() {
 
@@ -97,4 +115,131 @@
     });
 </script>
 
+<script type="text/javascript">
+    $(document).ready(function() {
+
+        // Javascript method's body can be found in assets/js/demos.js
+        demo.initDashboardPageCharts();
+
+        demo.initVectorMap();
+    });
+
+    $(document).ready(function () {
+        $('#datatables').DataTable({
+            "pagingType": "full_numbers",
+            "lengthMenu": [
+                [10, 25, 50, -1],
+                [10, 25, 50, "All"]
+            ],
+            responsive: true,
+            language: {
+                search: "_INPUT_",
+                searchPlaceholder: "Search",
+            }
+
+        });
+
+
+        var table = $('#datatables').DataTable();
+
+        // Edit record
+        table.on('click', '.edit', function () {
+            $tr = $(this).closest('tr');
+
+            var data = table.row($tr).data();
+            alert('You press on Row: ' + data[0] + ' ' + data[1] + ' ' + data[2] + '\'s row.');
+        });
+
+        // Delete a record
+        table.on('click', '.remove', function (e) {
+            $tr = $(this).closest('tr');
+            table.row($tr).remove().draw();
+            e.preventDefault();
+        });
+
+        //Like record
+        table.on('click', '.like', function () {
+            alert('You clicked on Like button');
+        });
+
+        $('.card .material-datatables label').addClass('form-group');
+    });
+    
+
+    $(document).ready(function () {
+        demo.initFullCalendar();
+    });
+   
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+
+        // Javascript method's body can be found in assets/js/demos.js
+        demo.initDashboardPageCharts();
+
+        demo.initVectorMap();
+    });
+
+    $(document).ready(function () {
+        $('#datatabless').DataTable({
+            "pagingType": "full_numbers",
+            "lengthMenu": [
+                [10, 25, 50, -1],
+                [10, 25, 50, "All"]
+            ],
+            responsive: true,
+            language: {
+                search: "_INPUT_",
+                searchPlaceholder: "Search",
+            }
+
+        });
+
+
+        var table = $('#datatabless').DataTable();
+
+        // Edit record
+        table.on('click', '.edit', function () {
+            $tr = $(this).closest('tr');
+
+            var data = table.row($tr).data();
+            alert('You press on Row: ' + data[0] + ' ' + data[1] + ' ' + data[2] + '\'s row.');
+        });
+
+        // Delete a record
+        table.on('click', '.remove', function (e) {
+            $tr = $(this).closest('tr');
+            table.row($tr).remove().draw();
+            e.preventDefault();
+        });
+
+        //Like record
+        table.on('click', '.like', function () {
+            alert('You clicked on Like button');
+        });
+
+        $('.card .material-datatables label').addClass('form-group');
+    });
+    
+
+    $(document).ready(function () {
+        demo.initFullCalendar();
+    });
+   
+</script>
+
+
+{{-- editor --}}
+<script>
+    CKEDITOR.replace('gioiThieu', {
+        filebrowserBrowseUrl: '{{ asset('ckeditor') }}/ckfinder/ckfinder.html',
+        filebrowserImageBrowseUrl: '{{ asset('ckeditor') }}/ckfinder/ckfinder.html?type=Images',
+        filebrowserFlashBrowseUrl: '{{ asset('ckeditor') }}/ckfinder/ckfinder.html?type=Flash',
+        filebrowserUploadUrl: '{{ asset('assets') }}/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files',
+        filebrowserImageUploadUrl: '{{ asset('ckeditor') }}/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images',
+        filebrowserFlashUploadUrl: '{{ asset('ckeditor') }}/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash'
+    });
+</script>
 </html>
+@yield('modal')

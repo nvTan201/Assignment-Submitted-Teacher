@@ -17,8 +17,9 @@ class Teacher extends Migration
             $table->increments('idTeacher');
             $table->string('fistNameTeacher', 15);
             $table->string('lastNameTeacher', 15);
-            $table->string('emailTeacher', 100);
+            $table->string('emailTeacher', 100)->unique();
             $table->string('passWordTeacher', 100);
+            $table->boolean('statusTeacher');
         });
     }
 

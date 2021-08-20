@@ -1,0 +1,16 @@
+tao pj: composer create-project laravel/laravel myproject
+
+
+Ch?y dc server: php artisan serveq
+Route: routes/web.php
+Views: resources/views/
+
+
+
+Controller: app/Http/Controllers
+T?o controller: + php artisan make:controller TênController
+		+ php artisan make:controller ExerciseController --resource
+cách t?o migration: php artisan make:migration TenBang
+
+excel:
+composer require maatwebsite/excel --ignore-platform-reqs

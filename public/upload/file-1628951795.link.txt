@@ -1,0 +1,18 @@
+teacher:
+https://github.com/nvTan201/Assignment-Submitted-Teacher.git
+
+student:
+https://github.com/nvTan201/Assignment-Submitted-Student.git
+
+kéo file:
+1:git clone 'du?ng-d?n-project-trên-git'
+2:composer install
+N?u khác phiên b?n:
+
+	composer update
+	composer upgrade
+
+
+Ch?y câu l?nh t?o môi tru?ng: cp .env.example .env
+
+Ch?y câu l?nh t?o key: php artisan key:generate

@@ -16,8 +16,11 @@ class Exercise extends Migration
         Schema::create('exercise', function (Blueprint $table) {
             $table->increments('idExercise');
             $table->string('question');
+            $table->string('content');
             $table->dateTime('postingTime');
             $table->dateTime('deadlineSubmission');
+            $table->boolean('title');
+            $table->boolean('status');
             $table->unsignedInteger('idGrade');
             $table->unsignedInteger('idTeacher');
             $table->foreign('idGrade')->references('idGrade')->on('grade');
