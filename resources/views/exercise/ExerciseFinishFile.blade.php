@@ -9,13 +9,15 @@
             </i> 
                 Bài Tập
         </a>
-        <a type="submit" class="btn btn-primary btn-round text-right" href="{{ route('addByExcel.student-dowload-excel') }}" style="left: 815px;">
-            expot
+        <a type="submit" class="btn btn-primary btn-round text-right" href="" style="left: 815px;">
+            export
             <i class="material-icons">
-                get_app
+            get_app
             </i> 
         </a>
     </div>
+    
+    
     <div class="container-fluid">
     <div class="row">
         <div class="col-md-12">
@@ -24,7 +26,7 @@
                     <p class="text-right">{{ $exercise->deadlineSubmission }}</p>
                     <h2>{{ $exercise->question }}</h2> 
                     <h3>
-                        {!! $exercise->content !!}
+                        <iframe src="{{ asset($exercise->content) }}" frameborder="0" width="100%"></iframe>
                     </h3>
                 </div>
             </div>

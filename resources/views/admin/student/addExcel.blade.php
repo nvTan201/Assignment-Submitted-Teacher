@@ -3,7 +3,7 @@
 <div class="modal fade" id="add" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-        <form id="form_create" method="POST" action="{{ route('addByExcel.class-add-excel') }}" enctype="multipart/form-data">
+        <form id="form_create" method="POST" action="{{ route('addByExcel.student-add-excel') }}" enctype="multipart/form-data">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Thêm Bài Tập</h5>
             </div>
@@ -13,7 +13,7 @@
                         <div class="form-group label-floating">
                             <div class="form-group">
                                 <label class="label-control">Tải file về rồi điền</label><br>
-                                <a href="{{ asset("upload/mauExcelClass.xlsx") }}" download> <span class="material-icons">file_download</span></a>
+                                <a href="{{ asset("upload/mauExcelStudent.xlsx") }}" download> <span class="material-icons">file_download</span></a>
                             </div>
                         </div>
                         <div>

@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\StudentMarkExport;
 use App\model\ExerciseFinish;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ExerciseFinishController extends Controller
 {
@@ -12,9 +14,15 @@ class ExerciseFinishController extends Controller
         $finish = ExerciseFinish::join('student', 'student.idStudent', '=', 'exercise_finish.idStudent')
             ->join('exercise', 'exercise.idExercise', '=', 'exercise_finish.idExercise')
             ->find($id);
-        return view("exercise.mark", [
-            'finish' => $finish,
-        ]);
+        if ($finish->title == 0) {
+            return view("exercise.mark", [
+                'finish' => $finish,
+            ]);
+        } else {
+            return view("exercise.markFile", [
+                'finish' => $finish,
+            ]);
+        }
     }
 
     public function update(Request $request, $id)
@@ -36,5 +44,10 @@ class ExerciseFinishController extends Controller
             ->find($id);
         return response()->json(['data' => $finish], 200);
         // return $finish;
+    }
+
+    public function export()
+    {
+        return Excel::download(new StudentMarkExport, 'danh_sach_diem.xlsx');
     }
 }

@@ -73,18 +73,27 @@ class ExerciseController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
         $exercise = Exercise::find($id);
         $finish = ExerciseFinish::join('exercise', 'exercise.idExercise', '=', 'exercise_finish.idExercise')
             ->join('student', 'student.idStudent', '=', 'exercise_finish.idStudent')
             ->where('exercise_finish.idExercise', $id)
             ->get();
-        return view("exercise.ExerciseFinish", [
-            "exercise" => $exercise,
-            "finish" => $finish,
-            "id" => $id
-        ]);
+
+        if ($exercise->title == 0) {
+            return view("exercise.ExerciseFinish", [
+                "exercise" => $exercise,
+                "finish" => $finish,
+                "id" => $id
+            ]);
+        } else {
+            return view("exercise.ExerciseFinishFile", [
+                "exercise" => $exercise,
+                "finish" => $finish,
+                "id" => $id
+            ]);
+        }
     }
 
     /**

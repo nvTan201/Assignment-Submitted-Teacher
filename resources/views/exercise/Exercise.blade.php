@@ -103,10 +103,15 @@
                                                             {{-- <th>{{ $result->fistNameTeacher." ".$result->lastNameTeacher }}</th> --}}
                                                             {{-- <th></th> --}}
                                                             <td class="text-right">
-                                                                <a href="{{ route('exercise.show', $result->idExercise) }}" class="btn btn-simple btn-info btn-icon" rel="tooltip" data-placement="left" title="Chấm"><i class="material-icons">fact_check</i></a>
+                                                                <form action="{{ route('exercise.show', $result->idExercise) }}" class="btn btn-simple btn-danger btn-icon">
+                                                                    <input type="hidden" name="title" value="0">
+                                                                    <button class="btn btn-simple btn-info btn-icon" rel="tooltip" data-placement="left" title="Chấm"><i class="material-icons">fact_check</i></button>
+                                                                </form>
+                                                                
                                                                 <a data-url="{{ Route('exercise.edit',[$result->idExercise]) }}" class="btn btn-simple btn-warning btn-icon formUpdate" data-toggle="modal" data-target="#updateModal" rel="tooltip" data-placement="left" title="Sửa"><span class="material-icons">
                                                                 border_color
                                                                 </span></a>
+
                                                                 <form data-url="{{ Route('exercise.destroy',[$result->idExercise]) }}" class="btn btn-simple btn-danger btn-icon deleteForm" method="POST">
                                                                     @csrf
                                                                     @method('DELETE')
@@ -174,7 +179,10 @@
                                                             {{-- <th>{{ $result->fistNameTeacher." ".$result->lastNameTeacher }}</th> --}}
                                                             {{-- <th></th> --}}
                                                             <td class="text-right">
-                                                                <a href="{{ route('exercise.show', $result->idExercise) }}" class="btn btn-simple btn-info btn-icon" rel="tooltip" data-placement="left" title="Chấm"><i class="material-icons">fact_check</i></a>
+                                                                <form action="{{ route('exercise.show', $result->idExercise) }}" class="btn btn-simple btn-danger btn-icon">
+                                                                    <input type="hidden" name="title" value="1">
+                                                                    <button class="btn btn-simple btn-info btn-icon" rel="tooltip" data-placement="left" title="Chấm"><i class="material-icons">fact_check</i></button>
+                                                                </form>
                                                                 <a data-url="{{ Route('exercise.edit',[$result->idExercise]) }}" class="btn btn-simple btn-warning btn-icon formUpdate" data-toggle="modal" data-target="#updateModalFile" rel="tooltip" data-placement="left" title="Sửa"><span class="material-icons">
                                                                 border_color
                                                                 </span></a>

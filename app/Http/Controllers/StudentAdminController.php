@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Imports\StudentImport;
 use App\model\Grade;
 use App\model\Student;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class StudentAdminController extends Controller
 {
@@ -110,5 +112,14 @@ class StudentAdminController extends Controller
         Student::find($id)->delete();
         // return "1";
         return response()->json([], 200);
+    }
+
+    public function import(Request $request)
+    {
+        $file = $request->file("file");
+        // dd($file);
+        Excel::import(new StudentImport, $file);
+
+        return redirect()->route("student.index");
     }
 }
