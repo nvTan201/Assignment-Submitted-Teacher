@@ -17,6 +17,7 @@ class ExerciseFinish extends Migration
             $table->increments('idExerciseFinish');
             $table->string('exerciseFinish');
             $table->dateTime('responseTime');
+            $table->boolean('titleFinish');
             $table->unsignedInteger('idExercise');
             $table->unsignedInteger('idStudent');
             $table->integer('mark');

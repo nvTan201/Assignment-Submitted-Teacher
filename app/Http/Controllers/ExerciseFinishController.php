@@ -15,11 +15,11 @@ class ExerciseFinishController extends Controller
             ->join('exercise', 'exercise.idExercise', '=', 'exercise_finish.idExercise')
             ->find($id);
         if ($finish->title == 0) {
-            return view("exercise.mark", [
+            return view("teacher.exercise.mark", [
                 'finish' => $finish,
             ]);
         } else {
-            return view("exercise.markFile", [
+            return view("teacher.exercise.markFile", [
                 'finish' => $finish,
             ]);
         }

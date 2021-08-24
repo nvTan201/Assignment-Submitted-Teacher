@@ -11,7 +11,7 @@ class AuthenticateController extends Controller
 {
     public function login()
     {
-        return view('login');
+        return view('teacher.login');
     }
 
     public function loginProcess(Request $request)
@@ -27,10 +27,10 @@ class AuthenticateController extends Controller
             if ($teacher->idTeacher == 1) {
                 return redirect()->Route('class.index');
             } else {
-                return redirect()->Route('/');
+                return redirect()->Route('teacher.home');
             }
         } catch (Exception $e) {
-            return redirect()->Route('login')->with('error', ['message' => 'Đăng Nhập Thất Bại!', 'email' => $email]);
+            return redirect()->Route('login-teacher')->with('error', ['message' => 'Đăng Nhập Thất Bại!', 'email' => $email]);
         }
         return $teacher;
     }
@@ -39,6 +39,6 @@ class AuthenticateController extends Controller
     {
         $request->session()->flush();
 
-        return redirect()->Route('login');
+        return redirect()->Route('login-teacher');
     }
 }

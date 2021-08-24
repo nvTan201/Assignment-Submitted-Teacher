@@ -1,45 +1,59 @@
 <?php
 
 use App\Http\Controllers\AuthenticateController;
+use App\Http\Controllers\AuthenticateStudentController;
 use App\Http\Controllers\ExerciseController;
 use App\Http\Controllers\ExerciseFinishController;
+use App\Http\Controllers\ExerciseStudentController;
+use App\Http\Controllers\FileStudentController;
 use App\Http\Controllers\GradeAdminController;
 use App\Http\Controllers\GradeController;
 use App\Http\Controllers\StudentAdminController;
 use App\Http\Controllers\TeacherAdminController;
 use App\Http\Controllers\TeacherController;
-use App\Http\Middleware\checkLogged;
-use App\Http\Middleware\checkLogin;
+use App\Http\Middleware\CheckLoggedStudent;
+use App\Http\Middleware\checkLoggedTeacher;
+use App\Http\Middleware\CheckLoginStudent;
+use App\Http\Middleware\checkLoginTeacher;
 use App\model\ExerciseFinish;
 use Illuminate\Support\Facades\Route;
 
 
 // Chưa Đăng Nhập
-// admin
-Route::middleware(checkLogged::class)->group(function () {
-    Route::get('/login', [AuthenticateController::class, 'login'])->name("login");
+// teacher
+Route::middleware(checkLoggedTeacher::class)->group(function () {
+    Route::get('/login-teacher', [AuthenticateController::class, 'login'])->name("login-teacher");
 
-    Route::post('/login-process', [AuthenticateController::class, 'loginProcess'])->name("login-process");
+    Route::post('/login-teacher-process', [AuthenticateController::class, 'loginProcess'])->name("login-teacher-process");
+});
+
+// student
+Route::middleware([CheckLoggedStudent::class])->group(function () {
+    Route::get('/login-student', [AuthenticateStudentController::class, 'login'])->name('login-student');
+
+    Route::post('/login-student-process', [AuthenticateStudentController::class, 'loginPro'])->name('login-student-process');
 });
 
 // Đã Đăng Nhập
-// admin
-Route::middleware(checkLogin::class)->group(function () {
-    Route::get('/', function () {
-        return view('Dashboard');
-    })->name("home");
+// teacher
+Route::middleware(checkLoginTeacher::class)->group(function () {
+    Route::name("teacher.")->group(function () {
+        Route::get('/', function () {
+            return view('teacher/Dashboard');
+        })->name("home");
 
-    Route::get('/Dashboard', function () {
-        return view('Dashboard');
-    })->name("Dashboard");
+        Route::get('/Dashboard', function () {
+            return view('teacher/Dashboard');
+        })->name("Dashboard");
+
+        Route::get('/calendar', function () {
+            return view("teacher/Calendar");
+        })->name("calendar");
+
+        Route::get('/logout-teacher', [AuthenticateController::class, 'logout'])->name("logout-teacher");
+    });
 
     Route::resource('exercise', ExerciseController::class)->except('create');
-
-    Route::get('/logout', [AuthenticateController::class, 'logout'])->name("logout");
-
-    Route::get('/calendar', function () {
-        return view("Calendar");
-    })->name("calendar");
 
     Route::resource('grade', GradeController::class)->except('create', 'update', 'edit');
 
@@ -57,7 +71,7 @@ Route::middleware(checkLogin::class)->group(function () {
 
     Route::resource('teacher', TeacherAdminController::class)->except('create', 'show');
 
-    Route::resource('student', StudentAdminController::class)->except('create', 'show');
+    Route::resource('studentAdmin', StudentAdminController::class)->except('create', 'show');
 
     Route::name("addByExcel.")->group(function () {
         Route::post("/class-add-excel", [GradeAdminController::class, "import"])->name("class-add-excel");
@@ -67,4 +81,28 @@ Route::middleware(checkLogin::class)->group(function () {
 
         Route::get("/student-dowload-excel", [ExerciseFinishController::class, "export"])->name("student-dowload-excel");
     });
+});
+
+// student
+Route::middleware([CheckLoginStudent::class])->group(function () {
+    Route::get('/dashboard', function () {
+        return view('student.dashboard');
+    })->name('dashboard');
+    Route::resource('grade', GradeController::class);
+    Route::resource('student', StudentrController::class);
+    Route::resource('ExerciseFinish', ExerciseFinishStudentController::class);
+    Route::resource('Exercise', ExerciseStudentController::class);
+
+
+    Route::get('logout-student', [AuthenticateStudentController::class, 'logout'])->name('logout-student');
+
+    //đăng file
+    Route::name('file.')->group(function () {
+        Route::get('/form', [FileStudentController::class, 'view-form'])->name('view-form');
+        // Route assigned name "admin.users"...
+        Route::post('/upload-file', [FileStudentController::class, 'uploadFile'])->name('upload-file');
+        Route::get('/get-all-file', [FileStudentController::class, 'getAllFile'])->name('get-all-file');
+        Route::post('/dowload-file', [FileStudentController::class, 'dowloadFile'])->name('dowload-file');
+    });
+    Route::get('/xem-diem', [PointsController::class, 'xemDiem'])->name('xemDiem');
 });

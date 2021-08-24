@@ -82,13 +82,13 @@ class ExerciseController extends Controller
             ->get();
 
         if ($exercise->title == 0) {
-            return view("exercise.ExerciseFinish", [
+            return view("teacher.exercise.ExerciseFinish", [
                 "exercise" => $exercise,
                 "finish" => $finish,
                 "id" => $id
             ]);
         } else {
-            return view("exercise.ExerciseFinishFile", [
+            return view("teacher.exercise.ExerciseFinishFile", [
                 "exercise" => $exercise,
                 "finish" => $finish,
                 "id" => $id

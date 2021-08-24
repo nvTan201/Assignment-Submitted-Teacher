@@ -2,23 +2,36 @@
 
 namespace App\Http\Controllers;
 
-use App\Imports\GradeImport;
-use App\model\Grade;
+use App\model\ExerciseStudent;
 use Illuminate\Http\Request;
-use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\DB;
 
-class GradeAdminController extends Controller
+class ExerciseStudentController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $grade = Grade::orderBy('grade.idGrade', 'desc')->get();
-        return view("teacher.admin.grade.index", [
-            "grade" => $grade,
+        // $exercises = Exercise::all();
+        // $search = $request->get('search');
+        // SELECT * FROM `exercise` INNER JOIN grade ON grade.idGrade= exercise.idGrade WHERE exercise.idGrade
+        // $exercises = Exercise::where('question', 'like', "%$search%")->paginate(1);
+
+        $exercises = DB::table('exercise')
+            ->join('grade', 'exercise.idGrade', '=', 'grade.idGrade')
+            ->select('grade.*', 'exercise.*')
+            ->orderBy('idExercise', 'DESC')
+            ->get();
+
+
+        // return $exercises;
+        return view('student.Exercise.index', [
+            "exercises" => $exercises
+            // 'search' => $search
+
         ]);
     }
 
@@ -40,15 +53,7 @@ class GradeAdminController extends Controller
      */
     public function store(Request $request)
     {
-        $name = $request->get("name");
-        $course = $request->get("course");
-
-        $class = new Grade();
-        $class->nameGrade = $name;
-        $class->course = $course;
-        $class->save();
-
-        return response()->json(["data" => $class], 200);
+        //
     }
 
     /**
@@ -59,7 +64,12 @@ class GradeAdminController extends Controller
      */
     public function show($id)
     {
-        //
+        $exercise = ExerciseStudent::find($id);
+
+        return view('student.Exercise.show', [
+            "exercises" => $exercise,
+
+        ]);
     }
 
     /**
@@ -70,9 +80,7 @@ class GradeAdminController extends Controller
      */
     public function edit($id)
     {
-        $class = Grade::find($id);
-        // return $exercise;
-        return response()->json(['data' => $class], 200);
+        //
     }
 
     /**
@@ -84,15 +92,7 @@ class GradeAdminController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $name = $request->get("name");
-        $course = $request->get("course");
-
-        $class = Grade::find($id);
-        $class->nameGrade = $name;
-        $class->course = $course;
-        $class->save();
-
-        return response()->json(["data" => $class], 200);
+        //
     }
 
     /**
@@ -103,16 +103,6 @@ class GradeAdminController extends Controller
      */
     public function destroy($id)
     {
-        Grade::find($id)->delete();
-        // return "1";
-        return response()->json([], 200);
-    }
-    
-    public function import(Request $request)
-    {
-        $file = $request->file("file");
-        Excel::import(new GradeImport, $file);
-
-        return redirect()->route("class.index");
+        //
     }
 }

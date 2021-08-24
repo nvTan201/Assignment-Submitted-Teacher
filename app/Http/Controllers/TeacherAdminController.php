@@ -19,7 +19,7 @@ class TeacherAdminController extends Controller
         $teacher = Teacher::where("statusTeacher", "1")
             ->orderBy('teacher.idTeacher', 'desc')
             ->get();
-        return view("admin.teacher.index", [
+        return view("teacher.admin.teacher.index", [
             'teacher' => $teacher,
         ]);
     }

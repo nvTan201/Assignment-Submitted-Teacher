@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Imports\GradeImport;
-use App\model\Grade;
+use App\model\ExerciseFinishStudent;
 use Illuminate\Http\Request;
-use Maatwebsite\Excel\Facades\Excel;
 
-class GradeAdminController extends Controller
+class ExerciseFinishStudentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,10 +14,7 @@ class GradeAdminController extends Controller
      */
     public function index()
     {
-        $grade = Grade::orderBy('grade.idGrade', 'desc')->get();
-        return view("teacher.admin.grade.index", [
-            "grade" => $grade,
-        ]);
+        return view('student.ExerciseFinish.index');
     }
 
     /**
@@ -29,7 +24,7 @@ class GradeAdminController extends Controller
      */
     public function create()
     {
-        //
+        return view('student.Exercise.show');
     }
 
     /**
@@ -40,15 +35,27 @@ class GradeAdminController extends Controller
      */
     public function store(Request $request)
     {
-        $name = $request->get("name");
-        $course = $request->get("course");
 
-        $class = new Grade();
-        $class->nameGrade = $name;
-        $class->course = $course;
-        $class->save();
-
-        return response()->json(["data" => $class], 200);
+        $idExercise = $request->get('idExercise');
+        $student = session()->get('id');
+        $text = $request->get('text');
+        $responseTime = $request->get('responseTime');
+        $title = $request->get('title');
+        $status = $request->get('status');
+        // dd($request->get('title'));
+        $exerciseFinish = new ExerciseFinishStudent();
+        $exerciseFinish->idExercise = $idExercise;
+        $exerciseFinish->idStudent = $student;
+        $exerciseFinish->exerciseFinish = $text;
+        $exerciseFinish->responseTime = $responseTime;
+        $exerciseFinish->title = $title;
+        $exerciseFinish->status = $status;
+        $exerciseFinish->save();
+        return redirect()->route('file.get-all-file')->with('error', [
+            "message" => 'đăng thành công'
+        ]);
+        // return $request;
+        // return Redirect::route("file.get-all-file");
     }
 
     /**
@@ -59,7 +66,12 @@ class GradeAdminController extends Controller
      */
     public function show($id)
     {
-        //
+        $exerciseFinish = ExerciseFinishStudent::find($id);
+        // return $exerciseFinish;
+
+        return view('student.exerciseFinish.show', [
+            "exerciseFinishs" => $exerciseFinish
+        ]);
     }
 
     /**
@@ -70,9 +82,7 @@ class GradeAdminController extends Controller
      */
     public function edit($id)
     {
-        $class = Grade::find($id);
-        // return $exercise;
-        return response()->json(['data' => $class], 200);
+        //
     }
 
     /**
@@ -84,15 +94,6 @@ class GradeAdminController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $name = $request->get("name");
-        $course = $request->get("course");
-
-        $class = Grade::find($id);
-        $class->nameGrade = $name;
-        $class->course = $course;
-        $class->save();
-
-        return response()->json(["data" => $class], 200);
     }
 
     /**
@@ -103,16 +104,6 @@ class GradeAdminController extends Controller
      */
     public function destroy($id)
     {
-        Grade::find($id)->delete();
-        // return "1";
-        return response()->json([], 200);
-    }
-    
-    public function import(Request $request)
-    {
-        $file = $request->file("file");
-        Excel::import(new GradeImport, $file);
-
-        return redirect()->route("class.index");
+        //
     }
 }

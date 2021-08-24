@@ -14,7 +14,7 @@ class TeacherController extends Controller
         $teacher = Teacher::find($id);
 
         // return $teacher;
-        return view("account", [
+        return view("teacher.account", [
             'teacher' => $teacher
         ]);
     }

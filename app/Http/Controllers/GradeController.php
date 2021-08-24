@@ -22,7 +22,7 @@ class GradeController extends Controller
             ->where("idTeacher", $id)
             ->get();
         $grade = Grade::all();
-        return view('grade.Grade', [
+        return view('teacher.grade.Grade', [
             'detail' => $detail,
             'grade' => $grade,
         ]);
@@ -80,7 +80,7 @@ class GradeController extends Controller
             ->where('exercise.title', '1')
             ->get();
         $grade = Grade::all();
-        return view('exercise.Exercise', [
+        return view('teacher.exercise.Exercise', [
             'exercise' => $exercise,
             'exerciseFile' => $exerciseFile,
             'grade' => $grade,

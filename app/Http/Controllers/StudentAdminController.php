@@ -21,7 +21,7 @@ class StudentAdminController extends Controller
             ->join('grade', 'grade.idGrade', '=', 'student.idGrade')
             ->get();
         $class = Grade::all();
-        return view("admin.student.index", [
+        return view("teacher.admin.student.index", [
             "student" => $student,
             "class" => $class,
         ]);
