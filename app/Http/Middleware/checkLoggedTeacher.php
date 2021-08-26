@@ -17,7 +17,7 @@ class checkLoggedTeacher
     public function handle(Request $request, Closure $next)
     {
         if ($request->session()->exists('id')) {
-            return redirect()->Route('home');
+            return redirect()->Route('teacher.dashboard');
         } else {
             return $next($request);
         }

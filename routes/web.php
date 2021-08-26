@@ -2,8 +2,10 @@
 
 use App\Http\Controllers\AuthenticateController;
 use App\Http\Controllers\AuthenticateStudentController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ExerciseController;
 use App\Http\Controllers\ExerciseFinishController;
+use App\Http\Controllers\ExerciseFinishStudentController;
 use App\Http\Controllers\ExerciseStudentController;
 use App\Http\Controllers\FileStudentController;
 use App\Http\Controllers\GradeAdminController;
@@ -39,18 +41,18 @@ Route::middleware([CheckLoggedStudent::class])->group(function () {
 Route::middleware(checkLoginTeacher::class)->group(function () {
     Route::name("teacher.")->group(function () {
         Route::get('/', function () {
-            return view('teacher/Dashboard');
-        })->name("home");
+            return redirect()->route('login-student');
+        });
 
-        Route::get('/Dashboard', function () {
-            return view('teacher/Dashboard');
-        })->name("Dashboard");
+        Route::get('/Dashboard', [DashboardController::class, 'index'])->name("dashboard");
 
         Route::get('/calendar', function () {
             return view("teacher/Calendar");
         })->name("calendar");
 
         Route::get('/logout-teacher', [AuthenticateController::class, 'logout'])->name("logout-teacher");
+
+        Route::post('/dashboard-show/{id}', [DashboardController::class, 'show'])->name('dashboard-show');
     });
 
     Route::resource('exercise', ExerciseController::class)->except('create');
@@ -88,8 +90,7 @@ Route::middleware([CheckLoginStudent::class])->group(function () {
     Route::get('/dashboard', function () {
         return view('student.dashboard');
     })->name('dashboard');
-    Route::resource('grade', GradeController::class);
-    Route::resource('student', StudentrController::class);
+    // Route::resource('student', StudentrController::class
     Route::resource('ExerciseFinish', ExerciseFinishStudentController::class);
     Route::resource('Exercise', ExerciseStudentController::class);
 
@@ -104,5 +105,5 @@ Route::middleware([CheckLoginStudent::class])->group(function () {
         Route::get('/get-all-file', [FileStudentController::class, 'getAllFile'])->name('get-all-file');
         Route::post('/dowload-file', [FileStudentController::class, 'dowloadFile'])->name('dowload-file');
     });
-    Route::get('/xem-diem', [PointsController::class, 'xemDiem'])->name('xemDiem');
+    // Route::get('/xem-diem', [PointsController::class, 'xemDiem'])->name('xemDiem');
 });

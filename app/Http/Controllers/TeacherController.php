@@ -33,4 +33,9 @@ class TeacherController extends Controller
         $teacher->save();
         return response()->json(['data' => $teacher], 200);
     }
+
+    public function password(Request $request)
+    {
+        
+    }
 }

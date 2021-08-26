@@ -23,7 +23,7 @@
                         <div class="collapse" id="collapseExample">
                             <ul class="nav">
                                 <li>
-                                    <a href="{{ route('logout') }}">
+                                    <a href="{{ route('logout-student') }}">
                                         <span class="sidebar-mini"> S </span>
                                         <span class="sidebar-normal"> logout </span>
                                     </a>

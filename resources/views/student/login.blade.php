@@ -35,30 +35,10 @@
                                     <div class="card-header text-center" data-background-color="rose">
                                         <h4 class="card-title">Login</h4>
                                         <div class="social-line">
-                                            <a href="#btn" class="btn btn-just-icon btn-simple">
-                                                <i class="fa fa-facebook-square"></i>
-                                            </a>
-                                            <a href="#pablo" class="btn btn-just-icon btn-simple">
-                                                <i class="fa fa-twitter"></i>
-                                            </a>
-                                            <a href="#eugen" class="btn btn-just-icon btn-simple">
-                                                <i class="fa fa-google-plus"></i>
-                                            </a>
+                                            
                                         </div>
                                     </div>
-                                    <p class="category text-center">
-                                        Or Be Classical
-                                    </p>
-                                    <div class="card-content">
-                                        <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <i class="material-icons">face</i>
-                                            </span>
-                                            {{-- <div class="form-group label-floating">
-                                                <label class="control-label"> Name</label>
-                                                <input type="text" name='lastNameStudent' class="form-control">
-                                            </div> --}}
-                                        </div>
+                                    <div class="card-content">  
                                         <div class="input-group">
                                             <span class="input-group-addon">
                                                 <i class="material-icons">email</i>

@@ -3,8 +3,6 @@
     
 <div class="content">
     <h1>HELLO</h1>
- 
-       
           <body>
               <form>
                 <input type="file">

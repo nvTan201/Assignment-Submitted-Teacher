@@ -48,7 +48,7 @@
                 @if  (session()->get('id')!=1)
                     <ul class="nav">
                         <li>
-                            <a href="{{ route('teacher.Dashboard') }}">
+                            <a href="{{ route('teacher.dashboard') }}">
                                 <i class="material-icons">dashboard</i>
                                 <p> Dashboard </p>
                             </a>

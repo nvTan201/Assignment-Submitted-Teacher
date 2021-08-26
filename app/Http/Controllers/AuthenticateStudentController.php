@@ -41,6 +41,6 @@ class AuthenticateStudentController extends Controller
         //xóa session
         $request->session()->flush();
         //điều hướng
-        return Redirect::route("login");
+        return Redirect::route("login-student");
     }
 }

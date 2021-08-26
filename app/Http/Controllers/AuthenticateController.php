@@ -27,7 +27,7 @@ class AuthenticateController extends Controller
             if ($teacher->idTeacher == 1) {
                 return redirect()->Route('class.index');
             } else {
-                return redirect()->Route('teacher.home');
+                return redirect()->Route('teacher.dashboard-teacher');
             }
         } catch (Exception $e) {
             return redirect()->Route('login-teacher')->with('error', ['message' => 'Đăng Nhập Thất Bại!', 'email' => $email]);
