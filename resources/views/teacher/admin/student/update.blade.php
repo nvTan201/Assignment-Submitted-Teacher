@@ -33,12 +33,12 @@
                                 <label class="label-control">gioi tinh</label>
                                 <div class="radio">
                                     <label>
-                                        <input type="radio" name="gender" value="1" id="nam"> nam
+                                        <input type="radio" name="genderEdit" value="1" id="nam"> nam
                                     </label>
                                 </div>
                                 <div class="radio">
                                     <label>
-                                        <input type="radio" name="gender" value="0" id="nu"> nu
+                                        <input type="radio" name="genderEdit" value="0" id="nu"> nu
                                     </label>
                                 </div>
                             </div>
@@ -84,10 +84,20 @@
         
         e.preventDefault();
 
-        var url = $('#form_update').attr('data-url');
-        var name = $("#nameClassUpdate").val();
-        var course = $("#courseUpdate").val();
-        if (name == "" || course =="" ) {
+        var url = $("#form_update").attr('data-url');
+        var fistName = $("#fistNameEdit").val();
+        var lastName = $("#lastNameEdit").val();
+        var dateBirth = $("#dateBirthEdit").val();
+        var gender = "";
+        var selected = $("input[type='radio'][name='genderEdit']:checked");
+        if (selected.length > 0) {
+            gender = selected.val();
+        }
+        var email = $("#emailEdit").val();
+        var pass = $("#passEdit").val();
+        var grade = $("#classEdit").val();
+
+        if (fistName == "" || lastName =="" || dateBirth ==""|| gender ==""|| email ==""|| pass ==""|| grade =="") {
             alert("điền đầy đủ thông tin")
         } else {
             $.ajax({
@@ -95,15 +105,20 @@
                 type: "PUT",
                 data: {
                     _token: "{{ csrf_token() }}",
-                    name:name,
-                    course:course,
+                    fistName:fistName,
+                    lastName:lastName,
+                    dateBirth:dateBirth,
+                    gender:gender,
+                    email:email,
+                    pass:pass,
+                    grade:grade,
                 },
                 success: function (response) {
 
                     Swal.fire({
                         position: 'top-end',
                         icon: 'success',
-                        title: 'Sửa Thành Công',
+                        title: 'Thêm Thành Công',
                         type: 'success',
                         showConfirmButton: false,
                         timer: 1500

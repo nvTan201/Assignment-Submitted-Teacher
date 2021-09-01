@@ -7,6 +7,7 @@ use App\model\Grade;
 use App\model\Student;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
+use SebastianBergmann\Environment\Console;
 
 class StudentAdminController extends Controller
 {
@@ -98,7 +99,28 @@ class StudentAdminController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+        $fistName = $request->get("fistName");
+        $lastName = $request->get("lastName");
+        $dateBirth = $request->get("dateBirth");
+        $gender = $request->get("gender");
+        $email = $request->get("email");
+        $pass = $request->get("pass");
+        $grade = $request->get("grade");
+
+
+
+        $student = Student::find($id);
+        $student->fistNameStudent = $fistName;
+        $student->lastNameStudent = $lastName;
+        $student->dateBirth = $dateBirth;
+        $student->gender = $gender;
+        $student->emailStudent = $email;
+        $student->passWordStudent = $pass;
+        $student->statusStudent  = "1";
+        $student->idGrade  = $grade;
+        $student->save();
+        return response()->json(['data' => $student], 200);
     }
 
     /**

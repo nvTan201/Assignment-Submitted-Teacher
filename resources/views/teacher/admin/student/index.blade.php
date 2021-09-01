@@ -95,6 +95,8 @@
                                         </form>
                                     </td>
                                 </tr>
+                                
+                                
                             @endforeach 
                         </tbody>
                     </table>
@@ -150,7 +152,7 @@
 </script>
 
 {{-- update --}}
-@include('teacher/admin.student.update')
+@include('teacher/admin.student.update')    
 <script type="text/javascript">
     $(".formUpdate").click(function(e){
         
@@ -184,9 +186,8 @@
                 $("#emailEdit").val(response.data.emailStudent);
                 $("#passEdit").val(response.data.passWordStudent);
                 $('select[name=classEdit').val(response.data.idGrade);
-                $('select[name=classEdit').ea(response.data.idGrade).prop('selected',true);
                 $("#courseUpdate").val(response.data.statusStudent);
-                var id = response.data.idGrade;
+                var id = response.data.idStudent;
                 $("#form_update").attr('data-url','{{ asset("studentAdmin/") }}/'+id);
             }
         });
