@@ -11,7 +11,7 @@
             <div class="sidebar-wrapper">
                 <div class="user">
                     <div class="photo">
-                        <img src="{{ asset('assets') }}/img/faces/avatar.jpg" />
+                        <img src="{{ asset('assets') }}/img/faces/default-avatar.png" />
                     </div>
                         
                     <div class="info">
