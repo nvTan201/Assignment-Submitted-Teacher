@@ -194,6 +194,8 @@
                                                                 </form>
                                                             </td>
                                                         </tr>
+                                                        
+                                                        @include('teacher/exercise.updateFile')
                                                     @endforeach
                                                 </tbody>
                                             </table>
@@ -216,7 +218,6 @@
 @include('teacher/exercise.create')
 @include('teacher/exercise.update') 
 @include('teacher/exercise.createFile')
-@include('teacher/exercise.updateFile')
 
 {{-- delete --}}
 <script type="text/javascript">

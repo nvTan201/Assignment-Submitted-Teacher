@@ -44,6 +44,23 @@
 
                                         <tr>
                                             <th>
+                                                {{ $y[$number] }} bạn
+                                            </th>
+                                            <th>
+                                                {{ $tb[$number] }} bạn
+                                            </th>
+                                            <th>
+                                                {{ $k[$number] }} bạn
+                                            </th>
+                                            <th>
+                                                {{ $g[$number] }} bạn
+                                            </th>
+                                            <th>
+                                                {{ $count[$number] }} bài
+                                            </th>   
+                                        </tr>
+                                        <tr>
+                                            <th>
                                                 <form action="{{ route('teacher.dashboard-show', $result->idGrade) }}" method="post">
                                                     @csrf
                                                     <input type="hidden" name="title" value="1">
@@ -71,9 +88,7 @@
                                                     <button class="btn">Chi Tiet</button>
                                                 </form>
                                             </th>
-                                            <th>
-                                                {{ $count[$number] }}
-                                            </th>
+                                            <th></th>
                                         </tr>
                                         
                                     </tbody>

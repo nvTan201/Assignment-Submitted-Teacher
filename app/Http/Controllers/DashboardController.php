@@ -19,15 +19,57 @@ class DashboardController extends Controller
             ->orderBy('grade.idGrade', 'desc')
             ->where("idTeacher", $id)
             ->get();
+
         $count = array();
         foreach ($detail as $result) {
             $exercise = Exercise::where("idGrade", $result->idGrade)->count();
             $count[] = $exercise;
         }
+
+        $y = array();
+        $tb = array();
+        $k = array();
+        $g = array();
+
+        foreach ($detail as $grade) {
+            $student = Student::where("idGrade", $grade->idGrade)
+                ->get();
+            $tbc = Exercise::where("idGrade", $grade->idGrade)->count('idExercise');
+            $number1 = 0;
+            $number2 = 0;
+            $number3 = 0;
+            $number4 = 0;
+
+            foreach ($student as $result) {
+                $exerciseFinish = ceil(ExerciseFinish::where("idStudent", $result->idStudent)->sum('mark') / $tbc);
+
+                if ($exerciseFinish <= 4) {
+                    $number1++;
+                } else if ($exerciseFinish > 4 && $exerciseFinish <= 6) {
+                    $number2++;
+                } else if ($exerciseFinish > 6 && $exerciseFinish <= 8) {
+                    $number3++;
+                } else if ($exerciseFinish > 8) {
+                    $number4++;
+                }
+            }
+
+            $y[] = $number1;
+            $tb[] = $number2;
+            $k[] = $number3;
+            $g[] = $number4;
+        }
+
+
         // return $count;
         return view('teacher.Dashboard', [
             'detail' => $detail,
             'count' => $count,
+            'y' => $y,
+            'tb' => $tb,
+            'k' => $k,
+            'g' => $g,
+
         ]);
     }
 
