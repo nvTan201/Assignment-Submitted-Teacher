@@ -22,11 +22,13 @@ class AuthenticateStudentController extends Controller
         // return $request;
         //firstOrFail bat loi
         try {
-            $student = Student::where('emailStudent', $email)->where('passwordStudent', $password)->firstOrFail();
-            $request->session()->put('id', $student->idStudent);
+            $student = Student::where('emailStudent', $email)->where('passwordStudent', $password)
+                ->where('statusStudent', '>', 0)
+                ->firstOrFail();
+            $request->session()->put('idStudent', $student->idStudent);
             $request->session()->put('lastNameStudent', $student->lastNameStudent);
 
-            return Redirect::route('dashboard');
+            return Redirect::route('dashboard-student');
 
             // return $student;
         } catch (Exception $e) {

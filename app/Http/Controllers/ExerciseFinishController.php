@@ -14,7 +14,8 @@ class ExerciseFinishController extends Controller
         $finish = ExerciseFinish::join('student', 'student.idStudent', '=', 'exercise_finish.idStudent')
             ->join('exercise', 'exercise.idExercise', '=', 'exercise_finish.idExercise')
             ->find($id);
-        if ($finish->title == 0) {
+        // dd($finish->titleFinish);
+        if ($finish->titleFinish == 0) {
             return view("teacher.exercise.mark", [
                 'finish' => $finish,
             ]);

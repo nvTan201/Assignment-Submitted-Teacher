@@ -5,7 +5,7 @@
     
 <div class="col-sm-10 col-lg-2 text-right">
     <div class="dropdown text-right">
-        <button href="" class="dropdown-toggle btn btn-primary btn-round btn-block" data-toggle="dropdown" style="left: 895px;">Thêm Lớp
+        <button href="" class="dropdown-toggle btn btn-primary btn-round btn-block" data-toggle="dropdown" style="left: 895px;">Thêm Giáo Viên
             <b class="caret"></b>       
         </button>
         <ul class="dropdown-menu dropdown-menu-right" style="left: 895px;">
@@ -64,6 +64,15 @@
                                     <th>{{ $result->lastNameTeacher." ".$result->fistNameTeacher}}</th>
                                     <th>{{ $result->emailTeacher }}</th>
                                     <td class="text-right">
+                                        @if ($result->statusTeacher == 0)
+                                            <a href="{{ route('lock-teacher', $result->idTeacher) }}" class="btn btn-simple btn-info btn-icon" rel="tooltip" data-placement="left" title="mở khoá"><span class="material-icons">
+                                                lock
+                                            </span></a> 
+                                        @else 
+                                            <a href="{{ route('lock-teacher', $result->idTeacher) }}" class="btn btn-simple btn-info btn-icon"  rel="tooltip" data-placement="left" title="khoá"><span class="material-icons">
+                                                lock_open
+                                            </span></a> 
+                                        @endif
                                         <a data-url="{{ route('teacher.edit', "$result->idTeacher") }}" class="btn btn-simple btn-warning btn-icon formUpdate" data-toggle="modal" data-target="#updateTeacher" rel="tooltip" data-placement="left" title="Sửa"><span class="material-icons">
                                         border_color
                                         </span></a>

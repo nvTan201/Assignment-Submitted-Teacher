@@ -25,7 +25,10 @@
                                 <div class="form-group">
                                     <label>Bài Làm</label>
                                     <div class="form-group label-floating">
-                                        <textarea class="form-control" rows="15" disabled>{{ $finish->exerciseFinish }}</textarea>
+                                        <textarea class="form-control" id="content" rows="15" disabled>{!! $finish->exerciseFinish !!}</textarea>
+                                        <script>
+                                            CKEDITOR.replace( 'content' );
+                                        </script>
                                     </div>
                                 </div>
                             </div>

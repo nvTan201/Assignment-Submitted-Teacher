@@ -33,13 +33,6 @@
                     </div>
                 </div>
                 <ul class="nav">
-                    <li class="">
-                        <a href="">
-                            <i class="material-icons-outlined"></i>
-                            <p> Thông báo </p>
-                        </a>
-                    </li>
-                 
                     <li>
                         <a href="{{ route('file.get-all-file') }}">
                             <i class="material-icons">apps</i>
@@ -61,21 +54,14 @@
                         
                     </li>
                     <li>
-                        <a href="">
+                        <a href="{{ route('Points.index') }}">
                             <i class="material-icons">content_paste</i>
-                            <p> Xem điểm
-                                
+                            <p> 
+                                Xem điểm
                             </p>
                         </a>
                     </li>
                    
-                   
-                    <li>
-                        <a href="./calendar.html">
-                            <i class="material-icons">date_range</i>
-                            <p> Calendar </p>
-                        </a>
-                    </li>
                 </ul>
             </div>
         </div>

@@ -112,7 +112,7 @@
                     $('#createModal').modal('hide');
 
                     setTimeout(function(){
-                        window.location.href='{{ Route("class.index") }}';
+                        window.location.href='{{ Route("studentAdmin.index") }}';
                     },500)
              
                 }

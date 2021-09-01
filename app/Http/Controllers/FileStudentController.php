@@ -16,14 +16,15 @@ class FileStudentController extends Controller
     {
         return view('student.Exercise.show');
     }
+
     public function uploadFile(Request $request)
     {
 
 
         $file = $request->file('file');
-        $student = session()->get('id');
+        $student = session()->get('idStudent');
         $idExercise = $request->get('idExercise');
-        // dd($request->get('title'));
+        $title = $request->get('title');
 
         $responseTime = $request->get('responseTime');
         $url = 'upload/' . "file-" . time() . '.' . $file->getClientOriginalName();
@@ -32,9 +33,8 @@ class FileStudentController extends Controller
         $fileData->idStudent = $student;
         $fileData->responseTime = $responseTime;
         $fileData->exerciseFinish = $url;
-        // dd($url);
-        // dd($fileData->title);
-        // return $request;
+        $fileData->titleFinish = $title;
+        
         $fileData->save();
         $file->move('upload', $file->getClientOriginalName());
         return Redirect::route("file.get-all-file")->with('error', [

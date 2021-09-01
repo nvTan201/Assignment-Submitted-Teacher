@@ -19,12 +19,14 @@ class AuthenticateController extends Controller
         $email = $request->get('email');
         $password = $request->get('password');
         try {
-            $teacher = Teacher::where("emailTeacher", $email)->where("passWordTeacher", $password)->firstOrfail();
+            $teacher = Teacher::where("emailTeacher", $email)->where("passWordTeacher", $password)
+                ->where('statusTeacher', '>', 0)
+                ->firstOrfail();
             // $teacher = Teacher::all();
             $request->session()->put('id', $teacher->idTeacher);
             $request->session()->put('fistName', $teacher->fistNameTeacher);
             $request->session()->put('lastName', $teacher->lastNameTeacher);
-            if ($teacher->idTeacher == 1) {
+            if ($teacher->statusTeacher == 2) {
                 return redirect()->Route('class.index');
             } else {
                 return redirect()->Route('teacher.dashboard-teacher');

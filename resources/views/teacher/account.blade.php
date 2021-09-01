@@ -74,13 +74,11 @@
                     Swal.fire({
                         position: 'top-end',
                         icon: 'success',
-                        title: 'Thêm Thành Công',
+                        title: 'Thành Công',
                         type: 'success',
                         showConfirmButton: false,
                         timer: 1500
                     })
-
-                    $('#createModal').modal('hide');
 
                     setTimeout(function(){
                         window.location.href='{{ Route("account") }}';

@@ -16,8 +16,8 @@ class CheckLoggedStudent
      */
     public function handle($request, Closure $next)
     {
-        if ($request->session()->exists('id')) {
-            return Redirect::route("dashboard");
+        if ($request->session()->exists('idStudent')) {
+            return Redirect()->route("dashboard-student");
         } else {
             return $next($request);
         }

@@ -34,8 +34,23 @@ class TeacherController extends Controller
         return response()->json(['data' => $teacher], 200);
     }
 
-    public function password(Request $request)
+    public function editPassword()
     {
-        
+        $id = session()->get('id');
+        $teacher = Teacher::find($id);
+        return view("teacher.password", [
+            "teacher" => $teacher,
+        ]);
+    }
+
+    public function updatePassword(Request $request)
+    {
+        $id = session()->get('id');
+        $pass = $request->get("newpass");
+
+        $teacher = Teacher::find($id);
+        $teacher->passWordTeacher = $pass;
+        $teacher->save();
+        return response()->json(['data' => $teacher], 200);
     }
 }

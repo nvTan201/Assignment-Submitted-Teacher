@@ -16,7 +16,7 @@ class TeacherAdminController extends Controller
      */
     public function index()
     {
-        $teacher = Teacher::where("statusTeacher", "1")
+        $teacher = Teacher::where("statusTeacher", "!=", "2")
             ->orderBy('teacher.idTeacher', 'desc')
             ->get();
         return view("teacher.admin.teacher.index", [
@@ -125,6 +125,18 @@ class TeacherAdminController extends Controller
         Excel::import(new TeacherImport, $file);
 
 
+        return redirect()->route("teacher.index");
+    }
+
+    public function lock($id)
+    {
+        $teacher = Teacher::find($id);
+        if ($teacher->statusTeacher == 0) {
+            $teacher->statusTeacher = 1;
+        } else {
+            $teacher->statusTeacher = 0;
+        }
+        $teacher->save();
         return redirect()->route("teacher.index");
     }
 }

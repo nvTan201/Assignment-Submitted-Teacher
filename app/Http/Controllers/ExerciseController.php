@@ -120,6 +120,7 @@ class ExerciseController extends Controller
     {
         $idTeacher = session()->get("id");
         $grade = $request->get('grade');
+        $title = $request->get('title');
         $check = $request->get('check');
         $deadlineSubmission = $request->get('deadlineSubmission');
         $question = $request->get('question');
@@ -127,13 +128,12 @@ class ExerciseController extends Controller
         if ($check == 1) {
             $file = $request->file('file');
             $fileName = "file-" . time() . '.' . $file->getClientOriginalName();
-            $file->move('upload', $fileName);
+            // $file->move('upload', $fileName);
             $content = 'upload/' . $fileName;
         } else {
             $content = $request->get("content");
         }
-
-
+        
         $exercise = Exercise::find($id);
         $exercise->question = $question;
         $exercise->content = $content;
@@ -142,6 +142,9 @@ class ExerciseController extends Controller
         $exercise->idTeacher = $idTeacher;
         $exercise->save();
         // return $exercise;
+        if ($title == 1) {
+            return Redirect()->route('grade.show', $grade);
+        }
         return response()->json(['data' => $exercise], 200);
     }
 

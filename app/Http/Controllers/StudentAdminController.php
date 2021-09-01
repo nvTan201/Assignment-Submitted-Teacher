@@ -120,6 +120,18 @@ class StudentAdminController extends Controller
         // dd($file);
         Excel::import(new StudentImport, $file);
 
-        return redirect()->route("student.index");
+        return redirect()->route("studentAdmin.index");
+    }
+
+    public function lock($id)
+    {
+        $student = Student::find($id);
+        if ($student->statusStudent == 0) {
+            $student->statusStudent = 1;
+        } else {
+            $student->statusStudent = 0;
+        }
+        $student->save();
+        return redirect()->route("studentAdmin.index");
     }
 }

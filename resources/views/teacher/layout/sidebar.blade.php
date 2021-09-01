@@ -35,7 +35,7 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="#">
+                                        <a href="{{ route('edit-password') }}">
                                             <span class="sidebar-mini"> EP </span>
                                             <span class="sidebar-normal"> Edit Password </span>
                                         </a>
@@ -58,12 +58,6 @@
                             <a href="{{ route('grade.index') }}">
                                 <i class="material-icons">grading</i>
                                 <p> Class </p>
-                            </a>
-                        </li>
-                        <li>    
-                            <a href="{{ route('teacher.calendar') }}">
-                                <i class="material-icons">date_range</i>
-                                <p> Calendar </p>
                             </a>
                         </li>
                     </ul>

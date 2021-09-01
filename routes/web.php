@@ -10,6 +10,7 @@ use App\Http\Controllers\ExerciseStudentController;
 use App\Http\Controllers\FileStudentController;
 use App\Http\Controllers\GradeAdminController;
 use App\Http\Controllers\GradeController;
+use App\Http\Controllers\PointsController;
 use App\Http\Controllers\StudentAdminController;
 use App\Http\Controllers\TeacherAdminController;
 use App\Http\Controllers\TeacherController;
@@ -83,13 +84,19 @@ Route::middleware(checkLoginTeacher::class)->group(function () {
 
         Route::get("/student-dowload-excel", [ExerciseFinishController::class, "export"])->name("student-dowload-excel");
     });
+
+    Route::get("edit-password", [TeacherController::class, 'editPassword'])->name("edit-password");
+    Route::post("update-password", [TeacherController::class, 'updatePassword'])->name("update-password");
+
+    Route::get("lock-teacher/{id}", [TeacherAdminController::class, 'lock'])->name("lock-teacher");
+    Route::get("lock-student/{id}", [StudentAdminController::class, 'lock'])->name("lock-student");
 });
 
 // student
 Route::middleware([CheckLoginStudent::class])->group(function () {
-    Route::get('/dashboard', function () {
+    Route::get('/dashboard-student', function () {
         return view('student.dashboard');
-    })->name('dashboard');
+    })->name('dashboard-student');
     // Route::resource('student', StudentrController::class
     Route::resource('ExerciseFinish', ExerciseFinishStudentController::class);
     Route::resource('Exercise', ExerciseStudentController::class);
@@ -105,5 +112,6 @@ Route::middleware([CheckLoginStudent::class])->group(function () {
         Route::get('/get-all-file', [FileStudentController::class, 'getAllFile'])->name('get-all-file');
         Route::post('/dowload-file', [FileStudentController::class, 'dowloadFile'])->name('dowload-file');
     });
-    // Route::get('/xem-diem', [PointsController::class, 'xemDiem'])->name('xemDiem');
+
+    Route::resource('Points', PointsController::class);
 });

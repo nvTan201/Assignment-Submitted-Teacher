@@ -5,7 +5,7 @@
     
 <div class="col-sm-10 col-lg-2 text-right">
     <div class="dropdown text-right">
-        <button href="" class="dropdown-toggle btn btn-primary btn-round btn-block" data-toggle="dropdown" style="left: 895px;">Thêm Lớp
+        <button href="" class="dropdown-toggle btn btn-primary btn-round btn-block" data-toggle="dropdown" style="left: 895px;">Thêm Sinh Viên
             <b class="caret"></b>       
         </button>
         <ul class="dropdown-menu dropdown-menu-right" style="left: 895px;">
@@ -73,6 +73,16 @@
                                     <th>{{ $result->emailStudent }}</th>
                                     <th>{{ $result->nameGrade."k".$result->course }}</th>
                                     <td class="text-right">
+                                        @if ($result->statusStudent == 0)
+                                            <a href="{{ route('lock-student', $result->idStudent) }}" class="btn btn-simple btn-info btn-icon" rel="tooltip" data-placement="left" title="mở khoá"><span class="material-icons">
+                                                lock
+                                            </span></a> 
+                                        @else
+                                            <a href="{{ route('lock-student', $result->idStudent) }}" class="btn btn-simple btn-info btn-icon"  rel="tooltip" data-placement="left" title="khoá"><span class="material-icons">
+                                                lock_open
+                                            </span></a> 
+                                        @endif
+                                        
                                         <a data-url="{{ route('studentAdmin.edit', "$result->idStudent") }}" class="btn btn-simple btn-warning btn-icon formUpdate" data-toggle="modal" data-target="#updateStudent" rel="tooltip" data-placement="left" title="Sửa"><span class="material-icons">
                                         border_color
                                         </span></a>
@@ -162,10 +172,13 @@
                 var nam = $("#nam").val();
                 var nu = $("#nu").val();
                 var check = response.data.gender;
-                if(nam == check){
+                if(check == 1){
                     $("#nam").attr('checked',true);
-                } else{
+                    $("#nu").attr("checked",false);
+                } 
+                if (check == 0){
                     $("#nu").attr("checked",true);
+                    $("#nam").attr('checked',false);
                 }
                 
                 $("#emailEdit").val(response.data.emailStudent);

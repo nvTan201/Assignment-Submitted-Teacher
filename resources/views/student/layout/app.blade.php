@@ -49,10 +49,8 @@
             @include('student.layout.navbar')
 
             {{-- content --}}
-            @yield('student.content')
-
             <div class="content">
-    
+            @yield('student.content')
             </div>
             {{-- footer --}}
             @include('student.layout.footer')

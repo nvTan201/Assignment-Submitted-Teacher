@@ -16,7 +16,7 @@ class CheckLoginStudent
      */
     public function handle($request, Closure $next)
     {
-        if ($request->session()->exists('id')) {
+        if ($request->session()->exists('idStudent')) {
             return $next($request);
         } else {
             return Redirect::route("login-student")->with('error', [

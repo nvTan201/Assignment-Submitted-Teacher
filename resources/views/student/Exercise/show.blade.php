@@ -36,9 +36,28 @@
                                     <form id="form1">
                                         <div id="dvContainer">
                                             <h4><b>Nội dung: <br></b>
-
-                                            <p>{!! $exercises->content !!}</p></h4>
-                                        </div>
+                                            @if ($exercises->title == 0)
+                                                <p>{!! $exercises->content !!}</p></h4>
+                                            @else
+                                                <div class="alert col-md-9" data-notify="container">
+                                                    <button type="button" class="close">
+                                                        <a href="{{ asset($exercises->content) }}" download>
+                                                            <i class="material-icons" style="color: black; size: 100px">
+                                                                get_app   
+                                                            </i>
+                                                        </a>
+                                                    </button>
+                                                    <span id="fileFinish">{{ basename($exercises->content).PHP_EOL }}</span>
+                                                    <script>
+                                                        var url = "{{ $exercises->content }}";
+                                                        var a = url.split('-').pop().split('.')[0].split('?')[0];
+                                                        var filename = url.split(a+".").pop();
+                                                        $("#fileFinish").html(filename);
+                                                    </script>
+                                                </div>
+                                            @endif
+                                            <br> <br><br>
+                                        </div>  
                                         {{-- @if ($exercises->title == 1) --}}
                                             <input type="button" value="tải về" id="btnPrint" />
                                         {{-- @endif --}}
@@ -96,8 +115,7 @@
                                         <div class="tab-pane active" id="pill1">
                                             <form enctype="multipart/form-data" action="{{ route('file.upload-file') }}" method="POST">
                                                 @csrf
-                                            <input type="hidden" name="status" value="1">
-                                            <input type="hidden" name="title" value="{{ $exercises->title }}">
+                                            <input type="hidden" name="title" value="1">
                                             <br>
                                             <input type="hidden" name="idExercise" value="{{ $exercises->idExercise }}">
                                             <br>
@@ -125,14 +143,12 @@
                                             <h4>Làm bài tập</h4>
                                             <form action="{{ route('ExerciseFinish.store') }}" method="post">
                                                 @csrf
-                                                <input type="hidden" name="status" value="1">
-                                                <input type="hidden" name="title" value="{{ $exercises->title }}">
+                                                <input type="hidden" name="title" value="0">
                                                 <input type="hidden" name="idExercise" value="{{ $exercises->idExercise }}">
 
                                             Ngay nop:  <input type='datetime' id='date' value='<?php echo date('Y-m-d h:m:s');?>' min ="{{ asset($exercises->postingTime) }}"
                                                 max="{{ asset($exercises->deadlineSubmission) }}" name="responseTime" readonly><br><br>
 
-                                                <a href="{{ asset($exercises->content) }}" download> Mẫu excel để điền </a>
                                                 <textarea name="text" id="text" cols="100" rows="10"></textarea>
                                                 <br>
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

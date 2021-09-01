@@ -41,21 +41,17 @@ class ExerciseFinishStudentController extends Controller
         $text = $request->get('text');
         $responseTime = $request->get('responseTime');
         $title = $request->get('title');
-        $status = $request->get('status');
         // dd($request->get('title'));
         $exerciseFinish = new ExerciseFinishStudent();
         $exerciseFinish->idExercise = $idExercise;
         $exerciseFinish->idStudent = $student;
         $exerciseFinish->exerciseFinish = $text;
         $exerciseFinish->responseTime = $responseTime;
-        $exerciseFinish->title = $title;
-        $exerciseFinish->status = $status;
+        $exerciseFinish->titleFinish = $title;
         $exerciseFinish->save();
         return redirect()->route('file.get-all-file')->with('error', [
             "message" => 'đăng thành công'
         ]);
-        // return $request;
-        // return Redirect::route("file.get-all-file");
     }
 
     /**

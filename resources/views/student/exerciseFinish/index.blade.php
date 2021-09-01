@@ -19,10 +19,10 @@
                 @endphp
                 @foreach($files as $file)
                     <tr>
-                        <th scope="row">{{ $file->idExerciseFinish }}</th>
+                        <th scope="row">{{ $number   }}</th>
                         <td>{{ $file->question }}</td>
-                        @if ($file->title==0)
-                            <td>{{ $file->exerciseFinish }}</td>
+                        @if ($file->titleFinish==0)
+                            <td>{!! $file->exerciseFinish !!}</td>
                         @else
                             <input type="hidden" id="link{{ $number }}" value="{{ $file->exerciseFinish }}">
                             <td id="exerciseFinish{{ $number }}"></td>
