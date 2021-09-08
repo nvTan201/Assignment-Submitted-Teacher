@@ -10,8 +10,7 @@ class Teacher extends Model
     
     protected $table = "teacher";
     protected $fillable = [
-        'fistNameTeacher', 'lastNameTeacher', 'emailTeacher', 'passWordTeacher',
-        'statusTeacher'
+        'fistNameTeacher', 'lastNameTeacher', 'emailTeacher', 'passWordTeacher', 'statusTeacher'
     ];
     public $primaryKey = "idTeacher";
     public $timestamps = false;

@@ -37,7 +37,7 @@ class ExerciseFinishStudentController extends Controller
     {
 
         $idExercise = $request->get('idExercise');
-        $student = session()->get('id');
+        $student = session()->get('idStudent');
         $text = $request->get('text');
         $responseTime = $request->get('responseTime');
         $title = $request->get('title');

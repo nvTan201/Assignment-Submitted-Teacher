@@ -107,10 +107,11 @@ class GradeAdminController extends Controller
         // return "1";
         return response()->json([], 200);
     }
-    
+
     public function import(Request $request)
     {
         $file = $request->file("file");
+        // dd($file);
         Excel::import(new GradeImport, $file);
 
         return redirect()->route("class.index");

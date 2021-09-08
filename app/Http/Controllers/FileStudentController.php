@@ -34,9 +34,9 @@ class FileStudentController extends Controller
         $fileData->responseTime = $responseTime;
         $fileData->exerciseFinish = $url;
         $fileData->titleFinish = $title;
-        
+
         $fileData->save();
-        $file->move('upload', $file->getClientOriginalName());
+        $file->move('upload', $url);
         return Redirect::route("file.get-all-file")->with('error', [
             "message" => "Submission"
         ]);

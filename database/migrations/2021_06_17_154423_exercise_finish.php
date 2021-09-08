@@ -20,8 +20,8 @@ class ExerciseFinish extends Migration
             $table->boolean('titleFinish');
             $table->unsignedInteger('idExercise');
             $table->unsignedInteger('idStudent');
-            $table->integer('mark')->null();
-            $table->string('note')->null();
+            $table->integer('mark')->nullable($value = true);
+            $table->string('note')->nullable($value = true);
             $table->foreign('idExercise')->references('idExercise')->on('exercise');
             $table->foreign('idStudent')->references('idStudent')->on('student');
         });

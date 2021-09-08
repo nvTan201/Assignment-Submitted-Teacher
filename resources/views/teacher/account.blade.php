@@ -32,7 +32,7 @@
                                 <div class="col-md-12">
                                     <div class="form-group label-floating">
                                         <label class="control-label">Email</label>
-                                        <input type="email" class="form-control" id="email" value="{{ $teacher->emailTeacher }}">
+                                        <input type="email" class="form-control" readonly id="email" value="{{ $teacher->emailTeacher }}">
                                     </div>
                                 </div>
                             </div>

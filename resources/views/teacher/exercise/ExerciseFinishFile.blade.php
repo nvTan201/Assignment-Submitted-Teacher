@@ -11,7 +11,7 @@
         </a>
         <a type="submit" class="btn btn-primary btn-round text-right" href="" style="left: 815px;">
             export
-            <i class="material-icons">
+            <i class="material-icons">  
             get_app
             </i> 
         </a>

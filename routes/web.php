@@ -80,7 +80,7 @@ Route::middleware(checkLoginTeacher::class)->group(function () {
     Route::name("addByExcel.")->group(function () {
         Route::post("/class-add-excel", [GradeAdminController::class, "import"])->name("class-add-excel");
         Route::post("/teacher-add-excel", [TeacherAdminController::class, "import"])->name("teacher-add-excel");
-        Route::post("/student-add-excel", [StudentAdminController::class, "import"])->name("student-add-excel");
+        Route::post("/student-add-excel", [StudentAdminController::class, "import"])->name("student-add-excel");    
 
 
         Route::get("/student-dowload-excel", [ExerciseFinishController::class, "export"])->name("student-dowload-excel");

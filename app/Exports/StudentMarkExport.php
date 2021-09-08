@@ -20,8 +20,10 @@ class StudentMarkExport implements FromCollection, WithHeadings, WithStyles
         $data = ExerciseFinish::join('student', 'student.idStudent', '=', 'exercise_finish.idStudent')
             ->join('grade', 'student.idGrade', '=', 'grade.idGrade')
             ->join('exercise', 'exercise_finish.idExercise', '=', 'exercise.idExercise')
+            // ->where()
             ->select('student.fistNameStudent', 'student.lastNameStudent', 'grade.nameGrade', 'grade.course', 'exercise.question', 'exercise_finish.mark', 'exercise_finish.note')
             ->get();
+        dd($data);
         return $data;
     }
 

@@ -38,7 +38,7 @@
             <div class="form-group row">
               <label for="staticEmail" class="col-sm-2 col-form-label">Email</label>
               <div class="col-sm-10">
-                <input type="text"  class="form-control-plaintext" name="email" id="staticEmail" value="{{ $student->emailStudent }}">
+                <input type="text"  class="form-control-plaintext" readonly name="email" id="staticEmail" value="{{ $student->emailStudent }}">
               </div>
             </div>
             <div class="form-group row">
