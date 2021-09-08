@@ -12,6 +12,7 @@ use App\Http\Controllers\GradeAdminController;
 use App\Http\Controllers\GradeController;
 use App\Http\Controllers\PointsController;
 use App\Http\Controllers\StudentAdminController;
+use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TeacherAdminController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Middleware\CheckLoggedStudent;
@@ -100,6 +101,7 @@ Route::middleware([CheckLoginStudent::class])->group(function () {
     // Route::resource('student', StudentrController::class
     Route::resource('ExerciseFinish', ExerciseFinishStudentController::class);
     Route::resource('Exercise', ExerciseStudentController::class);
+    Route::resource('student', StudentController::class);
 
 
     Route::get('logout-student', [AuthenticateStudentController::class, 'logout'])->name('logout-student');

@@ -21,7 +21,7 @@ class StudentImport implements ToModel, WithHeadingRow
             'fistNameStudent' => $row["ten"],
             'lastNameStudent' => $row["ho"],
             'dateBirth' => gmdate("Y-m-d", $UNIX_DATE),
-            'gender' => ($row["gioi_tinh"] == 'Nam') ? 1 : 0,
+            'gender' => ($row["gioi_tinh"] == 'nam' || $row["gioi_tinh"] == 'Nam') ? 1 : 0,
             'emailStudent' => $row["email"],
             'passWordStudent' => $row["password"],
             'idGrade' => Grade::where('nameGrade', $row["lop"])->where('course', $row["khoa"])->value('idGrade'),
